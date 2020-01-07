@@ -1,11 +1,12 @@
 *.ali
 *.o
 *~
+.libs
+.objs
 bcm_cyclic_writer
-bcm_simple_reader
-bcm_simple_writer
 filtered_reader
 simple_reader
 simple_writer
-socketcan_stream_test
-socketcan_test
+simple_writer_2
+stream_reader
+stream_writer

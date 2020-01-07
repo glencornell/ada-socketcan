@@ -1,7 +1,7 @@
 with Interfaces.C;
 with Sockets.Can_Frame;
 
-package Sockets.Can_Bcm is
+package Sockets.Can_Bcm_Thin is
    
    pragma Pure;
    
@@ -27,7 +27,7 @@ package Sockets.Can_Bcm is
    type Flag_Type is mod 2 ** 32;
    for Flag_Type'Size use 32;
    pragma Convention (C, Flag_Type);
-   
+      
    --  Possible values (logically OR'ed):
    SETTIMER           : constant Flag_Type := 16#00000001#;
    STARTTIMER         : constant Flag_Type := 16#00000002#;
@@ -46,14 +46,10 @@ package Sockets.Can_Bcm is
    for Frame_Count_Type'Size use 32;
    pragma Convention (C, Frame_Count_Type);
    
-   type Frame_Array_Type is array 
-     (Frame_Count_Type range <>) of 
-     aliased Sockets.Can_Frame.Can_Frame;
-   
-   --  msg_head - head of messages to/from the broadcast
-   --  manager. Note that this is not exactly the type as seen in
-   --  linux/can/bcm.h.  You must append the message array (with
-   --  nframes elements) before passing the structure to the kernel.
+   --  msg_head - head of messages to/from the broadcast manager. Note
+   --  that this is not exactly the type as seen in linux/can/bcm.h.
+   --  You must append the message array (with nframes elements) to
+   --  this header before passing the structure to the kernel.
    type Bcm_Msg_Head is record
       Opcode  : aliased Opcode_Type;                   -- Opcode
       Flags   : aliased Flag_Type;                     -- Special flags, see below.
@@ -63,6 +59,10 @@ package Sockets.Can_Bcm is
       Can_Id  : aliased Sockets.Can_Frame.Can_Id_Type; -- CAN ID of frames to be sent or received.
       Nframes : aliased Frame_Count_Type;              -- Number of frames to be sent or received.
    end record;
+   
+   type Frame_Array_Type is array 
+     (Frame_Count_Type range <>) of 
+     aliased Sockets.Can_Frame.Can_Frame;
    
 private
    
@@ -85,4 +85,4 @@ private
       RX_TIMEOUT => 11,
       RX_CHANGED => 12);
    
-end Sockets.Can_Bcm;
+end Sockets.Can_Bcm_Thin;

@@ -1,0 +1,24 @@
+with "../../socketcan.gpr";
+
+project Can_Utils is
+   for Languages use ("Ada");
+
+   for Library_Name use "can_utils";
+   for Library_Kind use "static";
+   for Library_Dir use ".libs";
+
+   for Source_Dirs use (".");
+   for Object_Dir use ".objs";
+   for Exec_Dir use ".";
+   for Create_Missing_Dirs use "True";
+   
+   package Compiler is
+      for Default_Switches ("Ada") use Socketcan.Compiler'Default_Switches ("Ada") & (
+       "-gnat12"        -- Ada12
+      ,"-ggdb"          -- compile for debugging
+      ,"-gnatwa"        -- Enable almost all warnings.
+      ,"-gnatwE"        -- Treat all run-time exception warnings as errors.
+      ); 
+  end Compiler;
+
+end Can_Utils;

@@ -50,7 +50,6 @@
 with Ada.Streams;
 with Gnat.Sockets;
 with Sockets.Can_Frame;
-with Sockets.Can_Bcm;
 
 package Sockets.Can is
    
@@ -84,8 +83,7 @@ package Sockets.Can is
       end case;
    end record;
    --  Socket addresses fully define a socket connection with protocol family,
-   --  an Internet address and a port. No_Sock_Addr provides a special value
-   --  for uninitialized socket addresses.
+   --  an Internet address and a port.
    
    -- CAN ID based filter in can_register().
    -- Description:
@@ -180,21 +178,13 @@ package Sockets.Can is
    --  buffer is empty, then no message is written to the CAN
    --  interface.
    
-   --  The following generic allows one to append a CAN frame array of
-   --  a specific bounded size to the bcm_msg_head struct.
-   generic 
-      Capacity : Sockets.Can_Bcm.Frame_Count_Type;
-   package Bcm is
-      type Msg is record
-	 Msg_Head : aliased Sockets.Can_Bcm.Bcm_Msg_Head;
-	 Frame    : aliased Sockets.Can_Bcm.Frame_Array_Type (1 .. Capacity);
-      end record;
-      procedure Send_Socket (Socket : in Socket_Type; Item : aliased Msg);
-      procedure Receive_Socket (Socket : in Socket_Type; Item : aliased in out Msg);
-   private
-      pragma Convention (C_Pass_By_Copy, Msg);
-   end Bcm;
+   procedure Raise_Socket_Error (Error : Integer);
+   --  Raise Socket_Error with an exception message describing the
+   --  error code from errno.
 
+   function Err_Code_Image (E : Integer) return String;
+   --  Return the value of E surrounded with brackets
+   
 private
    
    pragma No_Component_Reordering (Sock_Addr_Type);

@@ -10,7 +10,7 @@ procedure Bcm_Cyclic_Writer is
    Address      : Sockets.Can.Sock_Addr_Type;
    
    Capacity     : constant := 3;
-   package Bcm is new Sockets.Can.Bcm (Capacity => Capacity);
+   package Bcm is new Sockets.Can_Bcm.Bcm (Capacity => Capacity);
    Msg          : aliased constant Bcm.Msg := 
      (Msg_Head => 
 	(Opcode  => Sockets.Can_Bcm.TX_SETUP,
