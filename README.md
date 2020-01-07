@@ -5,10 +5,11 @@ GNU/Linux systems.
 
 ## Motivation
 
-In order to get familiar with SocketCAN on GNU/Linux systems, I
-created an Ada language binding.  I based this implementation upon the
-(CAN documentation in the Linux kernel)[https://www.kernel.org/doc/Documentation/networking/can.txt] and followed the style of the
-GNAT.Sockets binding.
+I created this Ada language binding to learn the use of SocketCAN on
+GNU/Linux systems.  I based this implementation upon the (CAN
+documentation in the Linux
+kernel)[https://www.kernel.org/doc/Documentation/networking/can.txt]
+and followed the style of the GNAT.Sockets binding.
 
 ## Building
 
@@ -49,7 +50,7 @@ cd examples/<subdir>
 gprbuild
 ```
 
-Note: substitute "<subdir>" with any of the subdirectory names.
+Note: substitute "```<subdir>```" with any of the subdirectory names.
 
 ## Authors
 
