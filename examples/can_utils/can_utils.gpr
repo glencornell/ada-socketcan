@@ -1,4 +1,4 @@
-with "../../socketcan.gpr";
+with "../../src/socketcan.gpr";
 
 project Can_Utils is
    for Languages use ("Ada");

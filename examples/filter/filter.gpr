@@ -1,4 +1,4 @@
-with "../../socketcan.gpr";
+with "../../src/socketcan.gpr";
 with "../../examples/can_utils/can_utils.gpr";
 
 project Filter is

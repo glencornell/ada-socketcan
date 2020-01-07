@@ -6,9 +6,9 @@ GNU/Linux systems.
 ## Motivation
 
 I created this Ada language binding to learn the use of SocketCAN on
-GNU/Linux systems.  I based this implementation upon the (CAN
+GNU/Linux systems.  I based this implementation upon the [CAN
 documentation in the Linux
-kernel)[https://www.kernel.org/doc/Documentation/networking/can.txt]
+kernel](https://www.kernel.org/doc/Documentation/networking/can.txt)
 and followed the style of the GNAT.Sockets binding.
 
 ## Building

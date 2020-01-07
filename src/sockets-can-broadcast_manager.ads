@@ -1,24 +1,25 @@
 package Sockets.Can.Broadcast_Manager is
    
-   type Broadcast_Manager_Type is private;
+   type Broadcast_Manager_Type is tagged private;
    
-   function Open (Interface_Name : in String) return Broadcast_Manager_Type;
-   --  Object initialization
+   procedure Create (This : out Broadcast_Manager_Type; 
+		     Interface_Name : in String);
+   --  Object initialization.
    
    function Get_Socket (This : in Broadcast_Manager_Type) return Sockets.Can.Socket_Type;
    --  Socket type accessor
    
-   procedure Send (This : in Broadcast_Manager_Type;
-		   Item : in Sockets.Can_Frame.Can_Frame;
-		   Interval : in Duration);
+   procedure Send_Periodic (This : in Broadcast_Manager_Type;
+			    Item : in Sockets.Can_Frame.Can_Frame;
+			    Interval : in Duration);
    --  Periodically send the CAN frame at the specified interval.
    
-   procedure Send (This : in Broadcast_Manager_Type;
-		   Item : in Sockets.Can_Frame.Can_Frame);
+   procedure Send_Once (This : in Broadcast_Manager_Type;
+			Item : in Sockets.Can_Frame.Can_Frame);
    --  Send the CAN frame only once.
    
-   procedure Update (This : in Broadcast_Manager_Type;
-		     Item : in Sockets.Can_Frame.Can_Frame);
+   procedure Update_Periodic (This : in Broadcast_Manager_Type;
+			      Item : in Sockets.Can_Frame.Can_Frame);
    --  Change the contents of the CAN frame that is periodically sent.
    
    procedure Stop_Periodic (This : in Broadcast_Manager_Type;
@@ -44,7 +45,7 @@ package Sockets.Can.Broadcast_Manager is
    
 private
    
-   type Broadcast_Manager_Type is record
+   type Broadcast_Manager_Type is tagged record
       Socket : Sockets.Can.Socket_Type;
       Address : Sockets.Can.Sock_Addr_Type;
    end record;

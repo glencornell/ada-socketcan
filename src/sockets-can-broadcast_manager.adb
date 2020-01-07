@@ -13,17 +13,16 @@ package body Sockets.Can.Broadcast_Manager is
    pragma Convention (C_Pass_By_Copy, Msg_Type);
 
    
-   function Open (Interface_Name : in String) return Broadcast_Manager_Type is
-      Rval : Broadcast_Manager_Type;
+   procedure Create (This: out Broadcast_Manager_Type; 
+		     Interface_Name : in String) is
    begin
-      Sockets.Can.Create_Socket(Rval.Socket, 
+      Sockets.Can.Create_Socket(This.Socket, 
 				Sockets.Can.Family_Can, 
 				Sockets.Can.Socket_Dgram, 
 				Sockets.Can.Can_Bcm);
-      Rval.Address.If_Index := If_Name_To_Index(Interface_Name);
-      Sockets.Can.Connect_Socket(Rval.Socket, Rval.Address);
-      return Rval;
-   end Open;
+      This.Address.If_Index := If_Name_To_Index(Interface_Name);
+      Sockets.Can.Connect_Socket(This.Socket, This.Address);
+   end Create;
    
    function Get_Socket (This : in Broadcast_Manager_Type) return Sockets.Can.Socket_Type is
    begin
@@ -60,9 +59,9 @@ package body Sockets.Can.Broadcast_Manager is
       Gnat.Sockets.Send_Socket(Socket, Buf, Unused_Last);
    end Send_Socket;
    
-   procedure Send (This : in Broadcast_Manager_Type;
-		   Item : in Sockets.Can_Frame.Can_Frame;
-		   Interval : in Duration) is
+   procedure Send_Periodic (This : in Broadcast_Manager_Type;
+			    Item : in Sockets.Can_Frame.Can_Frame;
+			    Interval : in Duration) is
       Msg : aliased constant Msg_Type := 
 	(Msg_Head => (Opcode  => Sockets.Can_Bcm_Thin.Tx_Setup,
 	              Flags   => Sockets.Can_Bcm_Thin.SETTIMER or 
@@ -75,10 +74,10 @@ package body Sockets.Can.Broadcast_Manager is
 	 Frame => Item);
    begin
       Send_Socket(This.Socket, Msg);
-   end Send;
+   end Send_Periodic;
    
-   procedure Send (This : in Broadcast_Manager_Type;
-		   Item : in Sockets.Can_Frame.Can_Frame) is
+   procedure Send_Once (This : in Broadcast_Manager_Type;
+			Item : in Sockets.Can_Frame.Can_Frame) is
       Msg : aliased constant Msg_Type := 
 	(Msg_Head => (Opcode  => Sockets.Can_Bcm_Thin.Tx_Send,
 	              Flags   => 0,
@@ -90,10 +89,10 @@ package body Sockets.Can.Broadcast_Manager is
 	 Frame => Item);
    begin
       Send_Socket(This.Socket, Msg);
-   end Send;
+   end Send_Once;
    
-   procedure Update (This : in Broadcast_Manager_Type;
-		     Item : in Sockets.Can_Frame.Can_Frame) is
+   procedure Update_Periodic (This : in Broadcast_Manager_Type;
+			      Item : in Sockets.Can_Frame.Can_Frame) is
       Msg : aliased constant Msg_Type := 
 	(Msg_Head => (Opcode  => Sockets.Can_Bcm_Thin.Tx_Setup,
 	              Flags   => 0,
@@ -105,7 +104,7 @@ package body Sockets.Can.Broadcast_Manager is
 	 Frame => Item);
    begin
       Send_Socket(This.Socket, Msg);
-   end Update;
+   end Update_Periodic;
    
    procedure Stop_Periodic (This : in Broadcast_Manager_Type;
 			    Can_Id : in Sockets.Can_Frame.Can_Id_Type) is
