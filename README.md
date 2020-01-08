@@ -30,17 +30,15 @@ TODO
 The Linux kernel must be compiled with support for SocketCAN ("can"
 and "can_raw" modules) with a driver for your specific CAN controller
 interface.  There is a virtual CAN driver for testing purposes which
-can be loaded and created in Linux with the commands below.
+can be loaded and created in Linux with the commands below (as root).
 
 ```
-$ modprobe can
-$ modprobe can_raw
-$ modprobe vcan
-$ sudo ip link add dev vcan0 type vcan
-$ sudo ip link set up vcan0
-$ ip link show vcan0
-3: vcan0: <NOARP,UP,LOWER_UP> mtu 16 qdisc noqueue state UNKNOWN 
-    link/can
+modprobe can
+modprobe can_raw
+modprobe vcan
+ip link add dev vcan0 type vcan
+ip link set up vcan0
+ip link show vcan0
 ```
 
 To build the examples, type the following:
