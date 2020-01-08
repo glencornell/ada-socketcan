@@ -1,7 +1,7 @@
 with "../../src/socketcan.gpr";
 with "../../examples/can_utils/can_utils.gpr";
 
-project Bcm is
+project Bcm_Cyclic_Writer is
    for Languages use ("Ada");
    
    for Source_Dirs use (".");
@@ -25,4 +25,4 @@ project Bcm is
    
    for Main use ("bcm_cyclic_writer");
    
-end Bcm;
+end Bcm_Cyclic_Writer;

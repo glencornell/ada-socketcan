@@ -3,7 +3,7 @@ with Sockets.Can.Broadcast_Manager;
 with Sockets.Can_Frame;
 with Interfaces;
 
-procedure Bcm_Cyclic_Writer is
+procedure Bcm_Simple_Writer is
    If_Name  : constant String := "vcan0";
    Unused_C : Character;
    Bcm      : Sockets.Can.Broadcast_Manager.Broadcast_Manager_Type;
@@ -48,13 +48,9 @@ procedure Bcm_Cyclic_Writer is
    begin
       accept Start;
       while not Terminated loop
-	 --  Modular integer types in Ada have wrap-around semantics.
-	 --  So the addition operation below will not raise an
-	 --  exception and will allow one to observe continual changes
-	 --  to the first data byte in CAN frame with ID=0x20.
 	 I := I + 1;
 	 Frame_2.Data(Frame_2.Data'First) := I;
-	 Bcm.Update_Periodic (Frame_2);
+	 Bcm.Send_Once (Frame_2);
 	 select
 	    accept Stop do
 	       Terminated := True;
@@ -68,12 +64,12 @@ procedure Bcm_Cyclic_Writer is
 begin
    Bcm.Create (If_Name);
    Bcm.Send_Periodic (Frame_1, 0.5);
-   Bcm.Send_Periodic (Frame_2, 1.0);
-   Bcm.Send_Periodic (Frame_3, 1.5);
+   Bcm.Send_Once (Frame_2);
+   Bcm.Send_Once (Frame_3);
    
    Updater.Start;
    
    Ada.Text_Io.Put_Line ("Press any key to stop");
    Ada.Text_Io.Get (Unused_C);
    Updater.Stop;
-end Bcm_Cyclic_Writer;
+end Bcm_Simple_Writer;

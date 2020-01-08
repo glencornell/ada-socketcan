@@ -5,7 +5,7 @@ the Linux kernel to periodically transmit CAN frames. There are two
 benefits to using the broadcast manager to send cyclic messages.
 First, the CPU burden is relieved from the user-space application.  It
 simply needs to update the CAN frames as system state changes.
-Secondly, ecause the broadcast manager is running as a kernel task,
+Secondly, because the broadcast manager is running as a kernel task,
 there is less jitter on the message transmissions.
 
 ## Usage
