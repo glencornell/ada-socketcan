@@ -2,40 +2,21 @@ with Ada.Text_Io;
 with Sockets.Can.Broadcast_Manager;
 with Sockets.Can_Frame;
 with Interfaces;
+with Create_Can_Frame;
 
 procedure Bcm_Simple_Writer is
    If_Name  : constant String := "vcan0";
    Unused_C : Character;
    Bcm      : Sockets.Can.Broadcast_Manager.Broadcast_Manager_Type;
    Frame_1  : constant Sockets.Can_Frame.Can_Frame := 
-     (Can_Id   => 16#10#,
-      Can_Dlc  => 3,
-      Uu_Pad   => 16#FF#,
-      Uu_Res0  => 16#FF#,
-      Uu_Res1  => 16#FF#,
-      Data     => (1 => 16#11#,
-		   2 => 16#22#,
-		   3 => 16#33#,
-		   others => 16#FF#));
+     Create_Can_Frame (Can_Id   => 16#10#,
+		       Data     => (16#11#, 16#22#, 16#33#));
    Frame_2  : Sockets.Can_Frame.Can_Frame := 
-     (Can_Id   => 16#20#,
-      Can_Dlc  => 1,
-      Uu_Pad   => 16#FF#,
-      Uu_Res0  => 16#FF#,
-      Uu_Res1  => 16#FF#,
-      Data     => (1 => 16#AA#,
-		   others => 16#FF#));
+     Create_Can_Frame (Can_Id   => 16#20#,
+		       Data     => (1 => 16#AA#));
    Frame_3  : constant Sockets.Can_Frame.Can_Frame := 
-     (Can_Id   => 16#30#,
-      Can_Dlc  => 4,
-      Uu_Pad   => 16#FF#,
-      Uu_Res0  => 16#FF#,
-      Uu_Res1  => 16#FF#,
-      Data     => (1 => 16#DE#,
-		   2 => 16#AD#,
-		   3 => 16#BE#,
-		   4 => 16#EF#,
-		   others => 16#FF#));
+     Create_Can_Frame (Can_Id   => 16#30#,
+		       Data     => (16#DE#, 16#AD#, 16#BE#, 16#EF#));
    
    task type T is
       entry Start;

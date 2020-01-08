@@ -1,3 +1,3 @@
 # Can Utils
 
-This directory contains a common library used by all of the examples.
+This directory contains common subprograms used by the examples.

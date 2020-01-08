@@ -4,6 +4,7 @@
 .libs
 .objs
 bcm_cyclic_writer
+bcm_filtered_reader
 bcm_simple_writer
 filtered_reader
 simple_reader

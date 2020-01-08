@@ -43,7 +43,7 @@ This library comes with the following simple examples:
 
 * [simple](examples/simple): Send and receive raw CAN frames.
 * [streams](examples/streams): Simple use of Ada streams capability.
-* [filter](examples/filter): Use the kernel to filter inbound CAN messages.
+* [filtered_reader](examples/filtered_reader): Use the kernel to filter inbound CAN messages.
 
 The Broadcast Manager (BCM) examples:
 

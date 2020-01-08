@@ -1,7 +1,7 @@
 with "../../src/socketcan.gpr";
 with "../../examples/can_utils/can_utils.gpr";
 
-project Filter is
+project Bcm_Filtered_Reader is
    for Languages use ("Ada");
    
    for Source_Dirs use (".");
@@ -23,6 +23,6 @@ project Filter is
       for Default_Switches ("ada") use ("-ggdb");
    end Linker;
    
-   for Main use ("filtered_reader");
+   for Main use ("bcm_filtered_reader");
    
-end Filter;
+end Bcm_Filtered_Reader;

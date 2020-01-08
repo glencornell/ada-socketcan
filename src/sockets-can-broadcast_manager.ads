@@ -43,6 +43,9 @@ package Sockets.Can.Broadcast_Manager is
 				    Can_Id : in Sockets.Can_Frame.Can_Id_Type);
    --  Remove the receive filter.
    
+   procedure Receive_Can_Frame (This : in Broadcast_Manager_Type;
+				Frame : out Sockets.Can_Frame.Can_Frame);
+   
 private
    
    type Broadcast_Manager_Type is tagged record

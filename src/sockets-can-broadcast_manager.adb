@@ -59,6 +59,18 @@ package body Sockets.Can.Broadcast_Manager is
       Gnat.Sockets.Send_Socket(Socket, Buf, Unused_Last);
    end Send_Socket;
    
+   procedure Receive_Socket
+     (Socket : Sockets.Can.Socket_Type;
+      Item   : aliased out Msg_Type) is
+      Sizeof_Item : constant Integer := (Msg_Type'Size + 7) / 8;
+      Buf : aliased Ada.Streams.Stream_Element_Array (1 .. Ada.Streams.Stream_Element_Offset(Sizeof_Item));
+      for Buf'Address use Item'Address;
+      pragma Import (Ada, Buf);
+      Unused_Last : Ada.Streams.Stream_Element_Offset;
+   begin
+      Gnat.Sockets.Receive_Socket(Socket, Buf, Unused_Last);
+   end Receive_Socket;
+   
    procedure Send_Periodic (This : in Broadcast_Manager_Type;
 			    Item : in Sockets.Can_Frame.Can_Frame;
 			    Interval : in Duration) is
@@ -161,5 +173,13 @@ package body Sockets.Can.Broadcast_Manager is
    begin
       Send_Socket(This.Socket, Msg);
    end Remove_Receive_Filter;
+   
+   procedure Receive_Can_Frame (This : in Broadcast_Manager_Type;
+				Frame : out Sockets.Can_Frame.Can_Frame) is
+      Msg : aliased Msg_Type;
+   begin
+      Receive_Socket(This.Socket, Msg);
+      Frame := Msg.Frame;
+   end Receive_Can_Frame;
    
 end Sockets.Can.Broadcast_Manager;

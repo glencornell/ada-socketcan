@@ -25,6 +25,9 @@ package Sockets.Can_Frame is
    -- The CAN frame payload data 
    type Can_Frame_Data_Array is array (Can_Dlc_Type range 1 .. Can_Dlc_Type'Last) of aliased Interfaces.Unsigned_8;
    
+   -- The same as above, but for use in thick bindings
+   type Unconstrained_Can_Frame_Data_Array is array (Can_Dlc_Type range <>) of aliased Interfaces.Unsigned_8;
+   
    ---------------------------------
    --  Basic CAN frame defintion  --
    ---------------------------------
