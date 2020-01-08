@@ -5,11 +5,13 @@ GNU/Linux systems.
 
 ## Motivation
 
-I created this Ada language binding to learn the use of SocketCAN on
-GNU/Linux systems.  I based this implementation upon the [CAN
-documentation in the Linux
+I created this Ada language binding to gain some experience using
+SocketCAN on GNU/Linux systems.  I based this implementation upon the
+[CAN documentation in the Linux
 kernel](https://www.kernel.org/doc/Documentation/networking/can.txt)
-and followed the style of the GNAT.Sockets binding.
+and followed the style of the GNAT.Sockets binding.  I did so with the
+goal to one day submit it as a patch to the GNAT sources as a
+GNU/Linux-specific addition.
 
 ## Building
 
@@ -26,6 +28,16 @@ gprbuild
 TODO
 
 ## Examples
+
+The examples cover what I feel are the most important use-cases of the
+SocketCAN feature. These bindings, especially the broadcast manager,
+are not comprehensive.  I only coded the features that I thought would
+be most useful.  Patches and comments are welcome.
+
+Documentation is limited, but is intentional.  I feel that it's better
+to have a trove of examples with a few comments as guidance rather
+than API documentation, or worse, soiling the code with [Doxygen
+madness](https://blog.codinghorror.com/coding-without-comments/).
 
 The Linux kernel must be compiled with support for SocketCAN ("can"
 and "can_raw" modules) with a driver for your specific CAN controller
@@ -60,7 +72,4 @@ This project is licensed under the GNU General Public License - see the [LICENSE
 
 ## TODO
 
-* Create better documentation
-* Create more realistic examples
-* Fix bcm_simple_reader - the BCM reader doesn't work as I thought
 * Incorporate this as a patch to GCC/GNAT.
