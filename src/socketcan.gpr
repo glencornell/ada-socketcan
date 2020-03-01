@@ -1,22 +1,26 @@
-project Socketcan is
-   for Languages use ("Ada");
+library project Socketcan is
+  Lib_Name := "socketcan";
+  Version := "1.0.0";
+  
+  for Languages use ("Ada");
+  
+  for Library_Name use Lib_Name;
+  for Library_Kind use "dynamic";
+  for Library_Version use "lib" & Lib_Name & ".so." & Version;
+  for Library_Dir use ".libs";
 
-   for Library_Name use "socketcan";
-   for Library_Kind use "static";
-   for Library_Dir use ".libs";
-
-   for Source_Dirs use (".");
-   for Object_Dir use ".objs";
-   for Exec_Dir use ".";
-   for Create_Missing_Dirs use "True";
-   
-   package Compiler is
-      for Default_Switches ("Ada") use (
-       "-gnat12"        -- Ada12
-      ,"-ggdb"          -- compile for debugging
-      ,"-gnatwa"        -- Enable almost all warnings.
-      ,"-gnatwE"        -- Treat all run-time exception warnings as errors.
-      ); 
+  for Source_Dirs use (".");
+  for Object_Dir use ".objs";
+  for Create_Missing_Dirs use "True";
+  
+  package Compiler is
+     for Default_Switches ("Ada") use 
+       (""
+	  ,"-gnat12"        -- Ada12
+	  ,"-ggdb"          -- compile for debugging
+	  ,"-gnatwa"        -- Enable almost all warnings.
+	  ,"-gnatwE"        -- Treat all run-time exception warnings as errors.
+       ); 
   end Compiler;
 
 end Socketcan;

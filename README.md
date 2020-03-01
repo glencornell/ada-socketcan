@@ -41,15 +41,19 @@ madness](https://blog.codinghorror.com/coding-without-comments/).
 
 This library comes with the following simple examples:
 
-* [simple](examples/simple): Send and receive raw CAN frames.
-* [streams](examples/streams): Simple use of Ada streams capability.
-* [filtered_reader](examples/filtered_reader): Use the kernel to filter inbound CAN messages.
+|Directory|Description|
+|---|---|
+|[simple](examples/simple)|Send and receive raw CAN frames.|
+|[streams](examples/streams)|Simple use of Ada streams capability.|
+|[filtered_reader](examples/filtered_reader)|Use the kernel to filter inbound CAN messages.|
 
 The Broadcast Manager (BCM) examples:
 
-* [bcm_cyclic_writer](examples/bcm_cyclic_writer): Use the broadcast manager to send periodic messages.
-* [bcm_filtered_reader](examples/bcm_filtered_reader): Use the broadcast manager to filter and down-sample incoming messages.
-* [bcm_simple_writer](examples/bcm_simple_writer): Use the broadcast manager to send individual CAN frames.
+|Directory|Description|
+|---|---|
+|[bcm_cyclic_writer](examples/bcm_cyclic_writer)|Use the broadcast manager to send periodic messages.|
+|[bcm_filtered_reader](examples/bcm_filtered_reader)|Use the broadcast manager to filter and down-sample incoming messages.|
+|[bcm_simple_writer](examples/bcm_simple_writer)|Use the broadcast manager to send individual CAN frames.|
 
 ## Using
 

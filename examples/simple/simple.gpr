@@ -11,8 +11,8 @@ project Simple is
    
    package Compiler is
       for Default_Switches ("Ada") use Socketcan.Compiler'Default_Switches ("Ada") & 
-	(
-	    "-gnat12"        -- Ada12
+	(""
+	   ,"-gnat12"        -- Ada12
 	   ,"-ggdb"          -- compile for debugging
 	   ,"-gnatwa"        -- Enable almost all warnings.
 	   ,"-gnatwE"        -- Treat all run-time exception warnings as errors.
