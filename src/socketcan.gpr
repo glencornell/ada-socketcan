@@ -20,6 +20,7 @@ library project Socketcan is
 	  ,"-ggdb"          -- compile for debugging
 	  ,"-gnatwa"        -- Enable almost all warnings.
 	  ,"-gnatwE"        -- Treat all run-time exception warnings as errors.
+	  ,"-fPIC"          -- Generate position independent code
        ); 
   end Compiler;
 
