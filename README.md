@@ -13,12 +13,20 @@ and followed the style of the GNAT.Sockets binding.  I did so with the
 goal to one day submit it as a patch to the GNAT sources as a
 GNU/Linux-specific addition.
 
+## Obtaining
+
+You can get the source code directly from [github](https://github.com/glencornell/ada-socketcan).  Alternatively, you can get the library from [Alire](https://alire.ada.dev/) using the command:
+
+```bash
+alr get socketcan
+```
+
 ## Building
 
 The code in this area may be built using the GNAT project builder
 (gprbuild).  To build:
 
-```
+```bash
 cd src
 gprbuild
 ```
@@ -62,7 +70,7 @@ and "can_raw" modules) with a driver for your specific CAN controller
 interface.  There is a virtual CAN driver for testing purposes which
 can be loaded and created in Linux with the commands below (as root).
 
-```
+```bash
 modprobe can
 modprobe can_raw
 modprobe vcan
@@ -73,7 +81,7 @@ ip link show vcan0
 
 To build the examples, type the following:
 
-```
+```bash
 cd examples/<subdir>
 gprbuild
 ```
@@ -86,7 +94,7 @@ Note: substitute "```<subdir>```" with any of the subdirectory names.
 
 ## License
 
-This project is licensed under the GNU General Public License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## TODO
 
